@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RoleFit
 
-## Getting Started
+A small, mobile-friendly web app for a job application test task.
 
-First, run the development server:
+**Live idea:** answer 5 questions → get a tech-role recommendation from **simple scoring rules** (not AI) → answers are **saved**.
+
+## What it does
+
+1. User answers **5 questions** about work preferences
+2. A deterministic scorer maps answers to:
+   - Frontend Developer
+   - Backend Developer
+   - Full-Stack Developer
+   - DevOps / Cloud Engineer
+   - Product-Minded Engineer
+3. Result + score breakdown is shown
+4. Answers are saved via `POST /api/submissions` (JSON file store) **and** in `localStorage`
+
+## Stack
+
+- Next.js (App Router) + TypeScript + Tailwind CSS
+- File-based JSON storage (`data/submissions.json` locally, `/tmp` on Vercel)
+- Browser `localStorage` for device history
+
+## Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deploy (Vercel)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npx vercel
+```
 
-## Learn More
+Or push to GitHub and import the repo in the Vercel dashboard.
 
-To learn more about Next.js, take a look at the following resources:
+> Note: on Vercel’s serverless filesystem, API saves go to `/tmp` (ephemeral). The app also saves history in the browser, so the “answers are saved” requirement still holds for users. For durable server storage, swap `src/lib/store.ts` for Postgres / Turso / etc.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+  app/                 # pages + API route
+  components/QuizApp.tsx
+  lib/quiz.ts          # questions + scoring rules
+  lib/store.ts         # persistence
+data/submissions.json  # local submissions
+```
 
-## Deploy on Vercel
+## API
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `GET /api/submissions` — recent submissions
+- `POST /api/submissions` — `{ "answers": { "energy": "ui", ... } }`
+# task-demo
