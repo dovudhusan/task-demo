@@ -1,0 +1,42 @@
+[
+  {
+    "id": "cbbfadce-e4c5-49cb-a1e5-0aef27fd9f2f",
+    "createdAt": "2026-08-14T18:42:07.066Z",
+    "answers": {
+      "energy": "ui",
+      "bug": "logs",
+      "weekend": "service",
+      "team": "owner",
+      "tradeoff": "mvp"
+    },
+    "scores": {
+      "frontend": 3,
+      "backend": 6,
+      "fullstack": 8,
+      "devops": 1,
+      "product": 4
+    },
+    "resultRole": "fullstack",
+    "resultTitle": "Full-Stack Developer"
+  },
+  {
+    "id": "8ac436a0-860b-419e-ae16-b1011881cf86",
+    "createdAt": "2026-08-14T18:38:14.963Z",
+    "answers": {
+      "energy": "api",
+      "bug": "user",
+      "weekend": "app",
+      "team": "solid",
+      "tradeoff": "correctness"
+    },
+    "scores": {
+      "frontend": 0,
+      "backend": 9,
+      "fullstack": 6,
+      "devops": 1,
+      "product": 4
+    },
+    "resultRole": "backend",
+    "resultTitle": "Backend Developer"
+  }
+]
